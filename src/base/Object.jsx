@@ -245,6 +245,9 @@ export default class FabricObject extends React.Component {
 		if (this.props.onSelected instanceof Function) {
 			object.on('selected', this.props.onSelected);
 		}
+		if (this.props.onDeselected instanceof Function) {
+			object.on('deselected', this.props.onDeselected);
+		}
 		if (this.props.onModified instanceof Function) {
 			object.on('modified', this.props.onModified);
 		}
@@ -286,6 +289,12 @@ export default class FabricObject extends React.Component {
 			object.off('selected');
 		} else if (nextProps.onSelected instanceof Function) {
 			object.on('selected', this.props.onSelected);
+		}
+
+		if (this.props.onDeselected && !nextProps.onDeselected) {
+			object.off('deselected');
+		} else if (nextProps.onDeselected instanceof Function) {
+			object.on('deselected', this.props.onDeselected);
 		}
 
 		if (this.props.onModified && !nextProps.onModified) {
